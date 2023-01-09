@@ -98,23 +98,9 @@ app.post('/api/notes', (req,res, next) => {
 
 //routes end
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: "Unknown endpoint"})
-}
 
 app.use(unknownEndpoint)
 
-const errorHandler = (error, request, response, next) =>{
-  console.error(error.message)
-
-  if (error.message === 'CastError') {
-    response.status(400).send({error: 'malformatted id'})
-  } else if (error.message === 'ValidationError') {
-    response.status(400).send({error: error.message})
-  }
-
-  next(error)
-}
 
 app.use(errorHandler)
 
