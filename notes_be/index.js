@@ -2,23 +2,22 @@
 //fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 
 
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const cors = require('cors')
+const app = require('./app')
+const http = require('http')
 const Note = require('./models/note')
+const config = require('./utils/config')
+const logger = require('./utils/logger')
+
+const server = http.createServer(app)
+
+server.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
 
 app.use(express.json())
 app.use(express.static('build'))
 app.use(cors())
 
-const requestLogger = (request, response, next) => {
-  console.log('Method: ', request.method)
-  console.log('Path: ', request.path)
-  console.log('Body: ', request.body)
-  console.log('---')
-  next()
-}
 
 app.use(requestLogger)
 
