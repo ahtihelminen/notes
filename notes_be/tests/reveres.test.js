@@ -9,11 +9,11 @@ test('reverse of a', () => {
 test('reverse of react', () => {
     const result = reverse('react')
 
-    except(result).toBe('tcaer')
+    expect(result).toBe('tcaer')
 })
 
 test('reverse of saippuakauppias', () => {
     const result = reverse('saippuakauppias')
 
-    except(result).toBe('saippuakauppias')
+    expect(result).toBe('saippuakauppias')
 })
